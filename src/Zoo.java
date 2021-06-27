@@ -9,7 +9,7 @@ public class Zoo implements Subject {
     ArrayList<Animal> animalsList;
     Map<String, Integer> kindsOfAnimals;
     private static Zoo instance = null;  // singleton
-    private List<ZooObserver> observers;
+    private List<ZooObserver> observers = new ArrayList<>();
 
 
     public Zoo(){    }
