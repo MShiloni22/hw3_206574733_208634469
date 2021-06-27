@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.*;
 
 public class Zoo implements Subject {
     int happiness;
@@ -8,6 +9,8 @@ public class Zoo implements Subject {
     ArrayList<Animal> animalsList;
     Map<String, Integer> kindsOfAnimals;
     private static Zoo instance = null;
+    private List<ZooObserver> observers;
+
 
     public Zoo(){
         getInstance();
@@ -40,14 +43,15 @@ public class Zoo implements Subject {
            if (kindOfAnimal.equals(animal.name)){
                // todo understand if this is the right way to approach maps
                kindsOfAnimals.put(animal.name, kindsOfAnimals.get(kindOfAnimal)+1);
-               //todo complete notify observers
-               System.out.println(animal.name + " has been added to the zoo!");
+               String updateMessage = animal.name + " has been added to the zoo!";
+               notifyObservers(updateMessage);
                return;
            }
         }
         kindsOfAnimals.put(animal.name, 1);
-        //todo complete notify observers
-        System.out.println(animal.name + " has been added to the zoo!");
+        String updateMessage = animal.name + " has been added to the zoo!";
+        notifyObservers(updateMessage);
+
     }
 
     public void feedAnimals(){
@@ -55,8 +59,8 @@ public class Zoo implements Subject {
         for (Animal a: this.animalsList){
             a.eat();
         }
-        //todo complete notify observers
-        System.out.println("The animals are being fed");
+        String updateMessage = "The animals are being fed";
+        notifyObservers(updateMessage);
     }
 
     public void watchAnimals(){
@@ -65,35 +69,36 @@ public class Zoo implements Subject {
         for (Animal a: this.animalsList){
             a.perform();
         }
-        //todo complete notify observers
-        System.out.println("The animals are being watched");
+        String updateMessage = "The animals are being watched";
+        notifyObservers(updateMessage);
     }
 
     public void showAnimalsInfo(){
         System.out.println("The zoo contains total of" + this.animalNumber + "animals:");
         for (String kindOfAnimal : kindsOfAnimals.keySet()){
             // todo understand if this is the right way to approach maps
-            System.out.println("-" + kindOfAnimal + ": " + kindsOfAnimals.get(kindOfAnimal));
+            System.out.println("- " + kindOfAnimal + ": " + kindsOfAnimals.get(kindOfAnimal));
         }
-        System.out.println("Happiness level:" + this.happiness);
+        System.out.println("Happiness level: " + this.happiness);
         if (this.happiness < 3 ) { System.out.println("The animals are not happy, you should watch them..."); }
-        if (this.happiness > 3 ) { System.out.println("The animals are very happy, keep working hard..."); }
-        System.out.println("Hunger level:" + this.hunger);
+        if (this.happiness >= 3 ) { System.out.println("The animals are very happy, keep working hard..."); }
+        System.out.println("Hunger level: " + this.hunger);
         if (this.hunger > 3 ) { System.out.println("The animals are hungry, you should feed them..."); }
     }
 
     @Override
     public void addObserver(ZooObserver observer){
-        // todo complete method
+        observers.add(observer);
     }
 
     @Override
     public void removeObserver(ZooObserver observer){
-        // todo complete method
+        observers.remove(observer);
     }
 
     @Override
-    public void notifyObservers(){
-        // todo complete method
+    public void notifyObservers(String updateMessage){
+        for (ZooObserver observer : observers)
+        observer.update(updateMessage);
     }
 }

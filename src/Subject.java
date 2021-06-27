@@ -1,5 +1,5 @@
 public interface Subject {
     void addObserver(ZooObserver observer);
     void removeObserver(ZooObserver observer);
-    void notifyObservers();
+    void notifyObservers(String updateMessage);
 }
