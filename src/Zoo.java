@@ -8,15 +8,12 @@ public class Zoo implements Subject {
     int animalNumber;
     ArrayList<Animal> animalsList;
     Map<String, Integer> kindsOfAnimals;
-    private static Zoo instance = null;
+    private static Zoo instance = null;  // singleton
     private List<ZooObserver> observers;
 
 
-    public Zoo(){
-        getInstance();
-    }
+    public Zoo(){    }
 
-    // singleton
     public static Zoo getInstance() {
         if (instance == null) {
             instance = new Zoo();
