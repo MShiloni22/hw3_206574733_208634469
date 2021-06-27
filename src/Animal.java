@@ -1,5 +1,5 @@
 public interface Animal {
-    String name = null;
+    String name = "";
     void eat();
     void perform();
 

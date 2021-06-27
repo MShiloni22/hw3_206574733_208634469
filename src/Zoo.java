@@ -36,6 +36,16 @@ public class Zoo implements Subject {
         this.animalsList.add(animal);
         this.animalNumber += 1;
 
+        // for first time
+        if (kindsOfAnimals.keySet().toArray().length == 0){
+            // todo understand if this is the right way to approach maps
+            kindsOfAnimals.put(animal.name, 1);
+            String updateMessage = animal.name + " has been added to the zoo!";
+            notifyObservers(updateMessage);
+            return;
+        }
+
+        // for non first time
         for (String kindOfAnimal : kindsOfAnimals.keySet()){
            if (kindOfAnimal.equals(animal.name)){
                // todo understand if this is the right way to approach maps
