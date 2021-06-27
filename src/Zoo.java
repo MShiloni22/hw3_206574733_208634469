@@ -40,13 +40,13 @@ public class Zoo implements Subject {
            if (kindOfAnimal.equals(animal.name)){
                // todo understand if this is the right way to approach maps
                kindsOfAnimals.put(animal.name, kindsOfAnimals.get(kindOfAnimal)+1);
-               //notify observers
+               //todo complete notify observers
                System.out.println(animal.name + " has been added to the zoo!");
                return;
            }
         }
         kindsOfAnimals.put(animal.name, 1);
-        // notify observers
+        //todo complete notify observers
         System.out.println(animal.name + " has been added to the zoo!");
     }
 
@@ -55,7 +55,7 @@ public class Zoo implements Subject {
         for (Animal a: this.animalsList){
             a.eat();
         }
-        //notify observers
+        //todo complete notify observers
         System.out.println("The animals are being fed");
     }
 
@@ -65,7 +65,7 @@ public class Zoo implements Subject {
         for (Animal a: this.animalsList){
             a.perform();
         }
-        //notify observers
+        //todo complete notify observers
         System.out.println("The animals are being watched");
     }
 
@@ -84,16 +84,16 @@ public class Zoo implements Subject {
 
     @Override
     public void subscribeObserver(ZooObserver observer){
-
+        // todo complete method
     }
 
     @Override
     public void unsubscribeObserver(ZooObserver observer){
-
+        // todo complete method
     }
 
     @Override
     public void notifyObservers(){
-
+        // todo complete method
     }
 }
