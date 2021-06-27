@@ -83,12 +83,12 @@ public class Zoo implements Subject {
     }
 
     @Override
-    public void subscribeObserver(ZooObserver observer){
+    public void addObserver(ZooObserver observer){
         // todo complete method
     }
 
     @Override
-    public void unsubscribeObserver(ZooObserver observer){
+    public void removeObserver(ZooObserver observer){
         // todo complete method
     }
 
