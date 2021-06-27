@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.*;
 
 public class Zoo implements Subject {
@@ -16,12 +15,16 @@ public class Zoo implements Subject {
 
     public static Zoo getInstance() {
         if (instance == null) {
+            System.out.println("Creating zoo...");
             instance = new Zoo();
             instance.happiness = 2;
             instance.hunger = 3;
             instance.animalNumber = 0;
             instance.animalsList = new ArrayList<>();
             instance.kindsOfAnimals = new HashMap<>();
+        }
+        else{
+            System.out.println("The zoo already exists...");
         }
         return instance;
     }
@@ -38,9 +41,8 @@ public class Zoo implements Subject {
 
         // for first time
         if (kindsOfAnimals.keySet().toArray().length == 0){
-            // todo understand if this is the right way to approach maps
             kindsOfAnimals.put(animal.name, 1);
-            System.out.println("case number 1");
+            System.out.println("Notifying observers:");
             String updateMessage = animal.name + " has been added to the zoo!";
             notifyObservers(updateMessage);
             return;
@@ -49,16 +51,15 @@ public class Zoo implements Subject {
         // for non first time
         for (String kindOfAnimal : kindsOfAnimals.keySet()){
            if (kindOfAnimal.equals(animal.name)){
-               // todo understand if this is the right way to approach maps
                kindsOfAnimals.put(animal.name, kindsOfAnimals.get(kindOfAnimal)+1);
-               System.out.println("case number 2");
+               System.out.println("Notifying observers:");
                String updateMessage = animal.name + " has been added to the zoo!";
                notifyObservers(updateMessage);
                return;
            }
         }
         kindsOfAnimals.put(animal.name, 1);
-        System.out.println("case number 3");
+        System.out.println("Notifying observers:");
         String updateMessage = animal.name + " has been added to the zoo!";
         notifyObservers(updateMessage);
 
@@ -69,6 +70,7 @@ public class Zoo implements Subject {
         for (Animal a: this.animalsList){
             a.eat();
         }
+        System.out.println("Notifying observers:");
         String updateMessage = "The animals are being fed";
         notifyObservers(updateMessage);
     }
@@ -79,6 +81,7 @@ public class Zoo implements Subject {
         for (Animal a: this.animalsList){
             a.perform();
         }
+        System.out.println("Notifying observers:");
         String updateMessage = "The animals are being watched";
         notifyObservers(updateMessage);
     }
@@ -86,7 +89,6 @@ public class Zoo implements Subject {
     public void showAnimalsInfo(){
         System.out.println("The zoo contains total of " + this.animalNumber + " animals:");
         for (String kindOfAnimal : kindsOfAnimals.keySet()){
-            // todo understand if this is the right way to approach maps
             System.out.println("- " + kindOfAnimal + ": " + kindsOfAnimals.get(kindOfAnimal));
         }
         System.out.println("Happiness level: " + this.happiness);
