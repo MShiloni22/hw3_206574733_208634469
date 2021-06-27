@@ -1,5 +1,5 @@
-public class Monkey implements Animal {
-    String name;
+public class Monkey extends Animal {
+    public String name;
 
     public Monkey(){
         this.name = "Monkey";

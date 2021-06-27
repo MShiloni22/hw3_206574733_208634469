@@ -1,5 +1,5 @@
-public class Unicorn implements Animal {
-    String name;
+public class Unicorn extends Animal {
+    public String name;
 
     public Unicorn(){
         this.name = "Unicorn";

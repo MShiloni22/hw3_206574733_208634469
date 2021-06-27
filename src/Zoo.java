@@ -7,7 +7,7 @@ public class Zoo implements Subject {
     int hunger;
     int animalNumber;
     ArrayList<Animal> animalsList;
-    Map<String, Integer> kindsOfAnimals;
+    HashMap<String, Integer> kindsOfAnimals;
     private static Zoo instance = null;  // singleton
     private List<ZooObserver> observers = new ArrayList<>();
 
@@ -20,8 +20,8 @@ public class Zoo implements Subject {
             instance.happiness = 2;
             instance.hunger = 3;
             instance.animalNumber = 0;
-            instance.animalsList = null;
-            instance.kindsOfAnimals = null;
+            instance.animalsList = new ArrayList<>();
+            instance.kindsOfAnimals = new HashMap<>();
         }
         return instance;
     }
@@ -40,6 +40,7 @@ public class Zoo implements Subject {
         if (kindsOfAnimals.keySet().toArray().length == 0){
             // todo understand if this is the right way to approach maps
             kindsOfAnimals.put(animal.name, 1);
+            System.out.println("case number 1");
             String updateMessage = animal.name + " has been added to the zoo!";
             notifyObservers(updateMessage);
             return;
@@ -50,12 +51,14 @@ public class Zoo implements Subject {
            if (kindOfAnimal.equals(animal.name)){
                // todo understand if this is the right way to approach maps
                kindsOfAnimals.put(animal.name, kindsOfAnimals.get(kindOfAnimal)+1);
+               System.out.println("case number 2");
                String updateMessage = animal.name + " has been added to the zoo!";
                notifyObservers(updateMessage);
                return;
            }
         }
         kindsOfAnimals.put(animal.name, 1);
+        System.out.println("case number 3");
         String updateMessage = animal.name + " has been added to the zoo!";
         notifyObservers(updateMessage);
 
@@ -81,7 +84,7 @@ public class Zoo implements Subject {
     }
 
     public void showAnimalsInfo(){
-        System.out.println("The zoo contains total of" + this.animalNumber + "animals:");
+        System.out.println("The zoo contains total of " + this.animalNumber + " animals:");
         for (String kindOfAnimal : kindsOfAnimals.keySet()){
             // todo understand if this is the right way to approach maps
             System.out.println("- " + kindOfAnimal + ": " + kindsOfAnimals.get(kindOfAnimal));
