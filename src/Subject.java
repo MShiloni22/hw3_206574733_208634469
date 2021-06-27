@@ -1,6 +1,5 @@
 public interface Subject {
-    void subscribeObserver(Observer observer);
-    void unsubscribeObserver(Observer observer);
+    void subscribeObserver(ZooObserver observer);
+    void unsubscribeObserver(ZooObserver observer);
     void notifyObservers();
-    }
 }

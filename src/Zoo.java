@@ -83,11 +83,17 @@ public class Zoo implements Subject {
     }
 
     @Override
-    void subscribeObserver(Observer observer);
+    public void subscribeObserver(ZooObserver observer){
+
+    }
 
     @Override
-    void unsubscribeObserver(Observer observer);
+    public void unsubscribeObserver(ZooObserver observer){
+
+    }
 
     @Override
-    void notifyObservers();
+    public void notifyObservers(){
+
+    }
 }
