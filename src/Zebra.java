@@ -1,9 +1,7 @@
 public class Zebra extends Animal {
     public String name;
 
-    public Zebra(){
-        this.name = "Zebra";
-    }
+    public Zebra(){ /* name set by the super class Animal */ }
 
 
     @Override

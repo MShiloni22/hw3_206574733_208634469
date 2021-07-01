@@ -1,4 +1,8 @@
 public abstract class AnimalFactory {
+    /**
+     * create a new instance of an animal.
+     * implemented at derived classes according to the class
+     */
     public abstract Animal createAnimal();
 }
 

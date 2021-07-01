@@ -7,12 +7,16 @@ public class Zoo implements Subject {
     int animalNumber;
     ArrayList<Animal> animalsList;
     HashMap<String, Integer> kindsOfAnimals;
-    private static Zoo instance = null;  // singleton
-    private List<ZooObserver> observers = new ArrayList<>();
+    private static Zoo instance = null;
+    private List<ZooObserver> observers;
 
 
     public Zoo(){    }
 
+    /**
+     * get the current instance of the zoo
+     * the zoo is a singleton - only one instance of a zoo can be created
+     */
     public static Zoo getInstance() {
         if (instance == null) {
             System.out.println("Creating zoo...");
@@ -22,6 +26,7 @@ public class Zoo implements Subject {
             instance.animalNumber = 0;
             instance.animalsList = new ArrayList<>();
             instance.kindsOfAnimals = new HashMap<>();
+            instance.observers = new ArrayList<>();
         }
         else{
             System.out.println("The zoo already exists...");
@@ -29,13 +34,16 @@ public class Zoo implements Subject {
         return instance;
     }
 
+    /**
+     * add animal to the zoo and notify the observers
+     * @param animal : an animal to add to the zoo
+     */
     public void addAnimal(Animal animal){
         /*
         add animal to the list, update the number of animals
         if animal name not in kindsOfAnimals keys, append the the name as key and "1" as value
-        else promote kindsOfAnimals[animal.name]
-        in the end print message
-        */
+        else promote relevant value in kindsOfAnimals
+         */
         this.animalsList.add(animal);
         this.animalNumber += 1;
 
@@ -65,6 +73,9 @@ public class Zoo implements Subject {
 
     }
 
+    /**
+     * feed the animals in the zoo and notify the observers
+     */
     public void feedAnimals(){
         if (this.hunger > 1) this.hunger -= 1;
         for (Animal a: this.animalsList){
@@ -75,6 +86,9 @@ public class Zoo implements Subject {
         notifyObservers(updateMessage);
     }
 
+    /**
+     * make a performance of the animals in the zoo and notify the observers
+     */
     public void watchAnimals(){
         if (this.hunger < 5) this.hunger += 1;
         if (this.happiness < 5) this.happiness += 1;
@@ -86,6 +100,12 @@ public class Zoo implements Subject {
         notifyObservers(updateMessage);
     }
 
+    /**
+     * print a message about the situation of the animals in the zoo.
+     * the message contains the total number of animals, how many animals from each kind,
+     * and the animals' hunger and happiness level.
+     * if the animals are hungry, happy or not happy, print a message about that
+     */
     public void showAnimalsInfo(){
         System.out.println("The zoo contains total of " + this.animalNumber + " animals:");
         for (String kindOfAnimal : kindsOfAnimals.keySet()){

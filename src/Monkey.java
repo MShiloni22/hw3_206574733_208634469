@@ -1,9 +1,7 @@
 public class Monkey extends Animal {
     public String name;
 
-    public Monkey(){
-        this.name = "Monkey";
-    }
+    public Monkey(){ /* name set by the super class Animal */ }
 
 
     @Override
